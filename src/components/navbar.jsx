@@ -3,7 +3,7 @@ import React from "react";
 const NavBar = () => {
   return (
     <nav>
-      <p>hello from navbar</p>
+        {/* todo */}
     </nav>
   );
 };
