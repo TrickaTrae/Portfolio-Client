@@ -87,6 +87,22 @@ class App extends Component {
     this.originalProjects = this.state.projects;
     this.projRef = React.createRef();
   }
+  
+  render() {
+    return (
+      <div className="App">
+        <NavBar />
+        <Intro projRef={this.projRef} onViewWorkClick={this.handleViewWorkScroll} />
+        <Projects 
+          projects={this.state.projects} projRef={this.projRef} 
+          onFilterClick={this.handleProjectFilter} 
+          animateProjectsClick={this.handleAnimateProjects} 
+          animateProjects={this.state.animateProjects} 
+        />
+        <Footer />
+      </div>
+    );
+  }
 
   handleViewWorkScroll = () => {
     let top = this.projRef.current.offsetTop;
@@ -107,21 +123,6 @@ class App extends Component {
     this.setState({ animateProjects: status });
   }
 
-  render() {
-    return (
-      <div className="App">
-        <NavBar />
-        <Intro projRef={this.projRef} onViewWorkClick={this.handleViewWorkScroll} />
-        <Projects 
-          projects={this.state.projects} projRef={this.projRef} 
-          onFilterClick={this.handleProjectFilter} 
-          animateProjectsClick={this.handleAnimateProjects} 
-          animateProjects={this.state.animateProjects} 
-        />
-        <Footer />
-      </div>
-    );
-  }
 }
 
 export default App;
