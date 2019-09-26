@@ -1,7 +1,7 @@
 #admin_page{
     background-color: #1c1e21;
     padding: 2%;
-    height: 100vh;
+    height: 100%;
 }
 
 .project-form {
@@ -13,4 +13,17 @@
 
 .submit-button {
     min-width: 100%;
+}
+
+.projects {
+    background-color: #282c34;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 2%;
+    margin: 1% 0;
+}
+
+.project-image {
+    width: 75%;
+    height: auto;
 }

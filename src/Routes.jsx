@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import AdminPage from "./components/admin-page";
+import AdminPage from "./pages/admin-page";
 import App from "./App";
 
 export default () => (

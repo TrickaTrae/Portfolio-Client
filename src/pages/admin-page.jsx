@@ -6,6 +6,7 @@ class AdminPage extends Component {
         super();
         this.state = {
             formInput: {},
+            projects: [],
             title: '',
             description: '',
             tech: '',
@@ -16,8 +17,11 @@ class AdminPage extends Component {
         }
     }
 
+    componentDidMount() {
+        this.fetchProjectsInDB();
+    }
+
     render() {
-        console.log("state: ", this.state);
         return (
           <div id="admin_page" className="">
               <div className="container">
@@ -40,8 +44,42 @@ class AdminPage extends Component {
                   </form>
       
               </div>
+
+            <div className="container">
+                {this.state.projects.map((project, key) => {
+                    return(
+                        <div className="projects" key={key}>
+                            <div className="row">
+                                <div className="col-6">
+                                    <h2 className="text-white">{project._id}</h2>
+                                    <span className="text-secondary">title: </span><span className="text-white">{project.title}</span><br/>
+                                    <span className="text-secondary">description: </span><span className="text-white">{project.description}</span><br/>
+                                    <span className="text-secondary">tech: </span><span className="text-white">{project.tech}</span><br/>
+                                    <span className="text-secondary">site link: </span><span className="text-white">{project.site_link}</span><br/>
+                                    <span className="text-secondary">code link: </span><span className="text-white">{project.code_link}</span><br/>
+                                    <span className="text-secondary">filters: </span><span className="text-white">{project.filters}</span><br/>
+                                    <button className="btn btn-warning mt-3">Modify</button>
+                                    <button className="btn btn-danger ml-2 mt-3">Delete</button>
+                                </div>
+                                <div className="col-6 d-flex align-items-center justify-content-center p-2">
+                                    <img className="project-image" src={"http://localhost:3000/" + project.image} alt="Card pic" />
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })}
+            </div>
+
           </div>
         );
+    }
+
+    fetchProjectsInDB = () => {
+        fetch('http://localhost:3000/projects').then(result => {
+            return result.json();
+        }).then(data => {
+            this.setState({ projects: data });
+        })
     }
 
     handleProjectFormSubmit = e => {
@@ -56,7 +94,7 @@ class AdminPage extends Component {
             filters: this.state.filters
         }}, () => {
             let formData = new FormData();
-            formData.append('formInput', JSON.stringify(this.state.formInput) );
+            formData.append('formInput', JSON.stringify(this.state.formInput));
             formData.append('image', this.state.imageFile);
     
             fetch('http://localhost:3000/projects', {
@@ -65,8 +103,8 @@ class AdminPage extends Component {
                 body: formData,
             })
             .then(res => res.json())
-            .then(response => console.log("success: ", JSON.stringify(response)))
-            .catch(error => console.log("error: ", error))
+            .then(result => console.log(JSON.stringify(result)))
+            .catch(error => console.log(JSON.stringify(error)))
         });
     }
 };
