@@ -55,7 +55,7 @@ class Home extends Component {
           code_link: "",
           image: img_ComCork,
           filters: "React, Meteor, Full-Stack",
-          disabled: true
+          disabled: false
         },
         {
           title: "Small Fri Academy",
@@ -75,7 +75,7 @@ class Home extends Component {
           code_link: "",
           image: img_Livayo,
           filters: "",
-          disabled: true
+          disabled: false
         },
         {
           title: "Canna Group Holdings",
