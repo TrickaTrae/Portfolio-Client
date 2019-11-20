@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import "../styles/admin-page.css";
 
 const projectURL = process.env.REACT_APP_PROJECT_URL;
-const imageURL = process.env.REACT_APP_IMAGE_URL;
 const verifyURL = process.env.REACT_APP_VERIFYUSERSESSION_URL;
 const signoutURL = process.env.REACT_APP_SIGNOUT_URL;
 
@@ -107,7 +106,7 @@ class AdminPage extends Component {
                                         <button className="btn btn-danger ml-2 mt-3" onClick={() => this.handleProjectDelete(project._id)}>Delete</button>
                                     </div>
                                     <div className="col-6 d-flex align-items-center justify-content-center p-2">
-                                        <img className="project-image" src={imageURL + project.image} alt="Card pic" />
+                                        <img className="project-image" src={project.image} alt="Card pic" />
                                     </div>
                                 </div>
                             </div>

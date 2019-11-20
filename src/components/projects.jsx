@@ -1,8 +1,6 @@
 import React from "react";
 import "../styles/projects.css";
 
-const imageURL = process.env.REACT_APP_IMAGE_URL;
-
 const Projects = props => {
   return (
     <div id="projects" className="d-flex align-items-center justify-content-center" ref={props.projRef}>
@@ -32,7 +30,7 @@ const Projects = props => {
                         props.projects.filter(project => project.disabled === false).map((project, key) => {
                             return (
                                 <div className={props.animateProjects ? "card my-card scale-in-center" : "card my-card"} onAnimationEnd={() => props.animateProjectsClick(false)} key={key}>
-                                    <img className="card-img-top" src={imageURL + project.image} alt="Card pic" />
+                                    <img className="card-img-top" src={project.image} alt="Card pic" />
                                     <div className="card-body">
                                         <h5 className="card-title text-white">{project.title}</h5>
                                         <p className="card-text text-white">{project.description}</p>
