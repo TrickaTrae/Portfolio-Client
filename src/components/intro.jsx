@@ -1,26 +1,49 @@
 import React from "react";
+import ProfilePic from '../assetts/ProfilePic-cropped.jpg';
 import "../styles/intro.css";
 import "../styles/animations.css"
 
 const Intro = props => {
   return (
-    <div id="intro" className="d-flex align-items-center justify-content-center">
-        <div className="container-fluid">
-            <div className="fade-in-fwd">
-                <div className="row d-flex align-items-center justify-content-center">
-                    <h1 className="text-center intro-h1">
+    <div id="intro" className="d-flex align-items-center justify-content-start">
+        <div className="container">
+
+            <div className="row d-flex align-items-center justify-content-start pb-4 fade-in-fwd-profile-pic">
+                <div className="col-12">
+                    <img src={ProfilePic} className="intro-profile-pic" alt="Profile Pic"/>
+                </div>
+            </div>
+
+            <div className="row d-flex align-items-center justify-content-start fade-in-fwd">
+                <div className="col-12">
+                    <h1 className="intro-h1">
                         <span className="text-white">Hello, My Name Is </span><span className="text-info">Traeger Winn</span>
                     </h1>
                 </div>
-                <div className="row d-flex align-items-center justify-content-center">
-                    <h1 className="text-white text-center intro-h1">I'm a Full-Stack Web Developer</h1>
+                <div className="col-12">
+                    <h1 className="text-white intro-h1">I'm a Full-Stack Web Developer</h1>
                 </div>
             </div>
-            <div className="row d-flex align-items-center justify-content-center fade-in-fwd-btn">
-                <button className="btn btn-lg btn-outline-info text-white m-2 pr-5 pl-5 intro-btn" onClick={props.onViewWorkClick}>
-                    <span className="font-weight-bolder">View My Work</span> <i className="fa fa-arrow-right my-arrow"></i>
-                </button>
+
+            <div className="row d-flex align-items-center justify-content-start pt-3 pb-4 fade-in-fwd-2nd">
+                <div className="col-12">
+                    <h3 className="text-white font-weight-normal intro-h3">Have a project, idea or problem you'd like to discuss?</h3>
+                </div>
+                <div className="col-12">
+                    <h3 className="text-white font-weight-normal intro-h3">
+                        Let's chat <a href="mailto:traeger.winn@gmail.com" className="my-link">traeger.winn@gmail.com</a>
+                    </h3>
+                </div>
             </div>
+
+            <div className="row d-flex align-items-center justify-content-start fade-in-fwd-btn">
+                <div className="col-12">
+                    <button className="btn btn-lg btn-outline-info text-white pr-5 pl-5 intro-btn" onClick={props.onViewWorkClick}>
+                        <span className="font-weight-bolder">View My Work</span> <i className="fa fa-arrow-right my-arrow"></i>
+                    </button>
+                </div>
+            </div>
+
         </div>
     </div>
   );
