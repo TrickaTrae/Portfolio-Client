@@ -1,51 +1,40 @@
 import React from "react";
+import "../styles/animations.css"
 import "../styles/projects.css";
 
 const Projects = props => {
   return (
-    <div id="projects" className="d-flex align-items-center justify-content-center" ref={props.projRef}>
-        <div className="container p-5 project-container">
-            <div className="row d-flex align-items-center justify-content-center">
-                <h1 className="text-white">My Work</h1>
-            </div>
-            <div className="divider"></div>
-            <div className="row pt-3 pb-3">
-                <div className="col text-center">
-                    <button className="btn btn-large btn-outline-info text-white my-btn" onClick={() => { props.onFilterClick("All"); props.animateProjectsClick(true); }}>All</button>
+    <div id="projects" className="d-flex align-items-center justify-content-start pt-5 pb-5" ref={props.projRef}>
+        <div className="container">
+
+            <div className="row">
+                <div className="col-12 pb-3">
+                    <h1 className="text-white">Recent Projects</h1>
                 </div>
-                <div className="col text-center">
-                    <button className="btn btn-large btn-outline-info text-white my-btn" onClick={() => { props.onFilterClick("React"); props.animateProjectsClick(true); }}>React</button>
-                </div>
-                <div className="col text-center">
-                    <button className="btn btn-large btn-outline-info text-white my-btn" onClick={() => { props.onFilterClick("Meteor"); props.animateProjectsClick(true); }}>Meteor</button>
-                </div>
-                <div className="col text-center">
-                    <button className="btn btn-large btn-outline-info text-white my-btn" onClick={() => { props.onFilterClick("Full-Stack"); props.animateProjectsClick(true); }}>Full Stack</button>
+                <div className="col-12 pb-4">
+                    <div className="border-top border-info w-50"></div>
                 </div>
             </div>
 
-            <div className="row p-4 card-row">
-                <div className="card-columns">
-                    {
-                        props.projects.filter(project => project.disabled === false).map((project, key) => {
-                            return (
-                                <div className={props.animateProjects ? "card my-card scale-in-center" : "card my-card"} onAnimationEnd={() => props.animateProjectsClick(false)} key={key}>
-                                    <img className="card-img-top" src={project.image} alt="Card pic" />
-                                    <div className="card-body">
-                                        <h5 className="card-title text-white">{project.title}</h5>
-                                        <p className="card-text text-white">{project.description}</p>
-                                        <p className="card-text text-white tech">{project.tech}</p>
-                                        
-                                        <a className={project.site_link !== "" ? "card-text view-site" : "none"} href={project.site_link}><small className="text-muted">View Site</small></a>
-                                        <a className={project.code_link !== "" ? "card-text view-code" : "none"} href={project.code_link}><small className="text-muted">View Code</small></a>
+            <div className="row">
+                {
+                    props.projects.filter(project => project.disabled === false).map((project, key) => {
+                        return (
+                            <div className="col-12 col-sm-6 pt-3 pb-3 project-col" key={key}>
+                                <div className="position-relative h-100 w-100 project-div">
+                                    <img src={project.image} className="project-image position-absolute h-100 w-100" alt="project pic"/>
+                                    <div className="position-absolute h-100 w-100 p-4 project-info-div">
+                                        <h2 className="text-white">{project.title}</h2>
+                                        <div className="border-top border-info w-25 mt-3 mb-3"></div>
+                                        <h5 className="text-white project-desc">{project.description}</h5>
                                     </div>
                                 </div>
-                            )
-                        })
-                    }
-                </div>
+                            </div>
+                        )
+                    })
+                }
             </div>
-
+            
         </div>
     </div>
   );

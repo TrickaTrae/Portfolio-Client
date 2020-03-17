@@ -5,17 +5,15 @@ import Projects from "../components/projects";
 import Footer from "../components/footer";
 import "../styles/home.css";
 
-const projectURL = process.env.REACT_APP_PROJECT_URL;
-
 class Home extends Component {
   constructor(){
     super();
     this.state = {
       projects: [],
       originalProjects: [],
-      animateProjects: false,
       animateFooter: false
     };
+
     this.projRef = React.createRef();
     this.footerRef = React.createRef();
   }
@@ -30,42 +28,22 @@ class Home extends Component {
       <div id="home">
         <NavBar />
         <Intro projRef={this.projRef} onViewWorkClick={this.handleViewWorkScroll} />
-        <Projects 
-          projects={this.state.projects} projRef={this.projRef} 
-          onFilterClick={this.handleProjectFilter} 
-          animateProjectsClick={this.handleAnimateProjects} 
-          animateProjects={this.state.animateProjects} 
-        />
+        <Projects projects={this.state.projects} projRef={this.projRef} />
         <Footer footerRef={this.footerRef} animateFooter={this.state.animateFooter} />
       </div>
     );
   }
 
   fetchProjectsInDB = () => {
-    fetch(projectURL).then(result => {
-      return result.json();
-    }).then(data => {
+    fetch(process.env.REACT_APP_PROJECT_URL).then(result => result.json()).then(data => {
       this.setState({ projects: data, originalProjects: data });
     })
-}
+  }
 
   handleViewWorkScroll = () => {
     let top = this.projRef.current.offsetTop;
     let left = this.projRef.current.offsetLeft;
     window.scroll({top: top, left: left, behavior: 'smooth'});
-  }
-
-  handleProjectFilter = currentFilter => {
-    if(currentFilter === "All"){
-      this.setState({ projects: this.state.originalProjects });
-    } else {
-      const projects = this.state.originalProjects.filter(project => project.filters.includes(currentFilter));
-      this.setState({ projects });
-    }
-  }
-
-  handleAnimateProjects = (status) => {
-    this.setState({ animateProjects: status });
   }
 
   handleFooterAnimation = () => {

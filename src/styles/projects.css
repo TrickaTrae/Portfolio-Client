@@ -1,107 +1,42 @@
 #projects {
-    background-color: #1c1e21;
-    height: 100%;
+  background-color: #1c1e21;
+  min-height: 100%;
 }
 
-.divider {
-    border-bottom: 3px solid #17a2b8;
-    max-width: 100px;
-    margin: auto;
-    margin-bottom: 2%;
-    margin-top: 2%;
+.project-col {
+  min-height: 25rem;
 }
 
-.my-btn {
-    min-width: 13.8rem;
-    margin: 1%;
-    font-weight: 500;
+.project-div {
+  overflow: hidden;
 }
 
-.my-btn:focus,
-.my-btn:active{
-    background-color: #17a2b8 !important;
-    outline: none !important;
-    box-shadow: none !important;
+.project-image {
+  object-fit: cover;
 }
 
-.my-card {
-    background-color: #282c34;
-    box-shadow: 3px 3px 8px #17191b; 
+.project-info-div {
+  z-index: 99;
+  background-color: #282c34;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 }
 
-.view-site {
-    text-decoration-color: #17a2b8 !important;
-    padding-right: 1em;
+.project-desc {
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.none {
-    display: none;
+.project-div:hover > .project-info-div {
+  opacity: .9;
+  cursor: pointer;
 }
 
-.view-code {
-    text-decoration-color: #17a2b8 !important;
+.project-div:hover > .project-image {
+  -webkit-animation: background-pan 5s ease-out both;
+	animation: background-pan 5s ease-out both;
 }
-
-.tech {
-    border-left: 1.4px solid #17a2b8;
-    padding-left: 0.5em;
-    margin-left: -0.6em;
-}
-
-.scale-in-center {
-	-webkit-animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
- @-webkit-keyframes scale-in-center {
-    0% {
-      -webkit-transform: scale(0);
-              transform: scale(0);
-      opacity: 1;
-    }
-    100% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      opacity: 1;
-    }
-  }
-  @keyframes scale-in-center {
-    0% {
-      -webkit-transform: scale(0);
-              transform: scale(0);
-      opacity: 1;
-    }
-    100% {
-      -webkit-transform: scale(1);
-              transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  @media screen and (max-width: 768px){
-    .project-container {
-        padding: 2rem 0 !important;
-    }
-    .card-columns {
-      -webkit-column-count: 2;
-      -moz-column-count: 2;
-      column-count: 2;
-    }
-}
-
-  @media screen and (max-width: 576px) {
-    .project-container {
-        padding: 24px !important;
-    }
-    .card-row {
-        padding: 4% !important;
-    }
-    .card-columns {
-        -webkit-column-count: 1;
-        -moz-column-count: 1;
-        column-count: 1;
-      }
-    .my-btn {
-        width: 100%;
-    }
-  }
