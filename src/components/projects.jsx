@@ -51,12 +51,12 @@ const Projects = props => {
                             <p className="text-white">{props.modalProject.tech}</p>
                             <div className="d-flex align-items-start justify-content-between pt-2">
                                 <div>
-                                    <button className="btn btn-info project-modal-button">
+                                    <a className={props.modalProject.site_link !== "" ? "btn btn-info project-modal-button" : "d-none"} href={props.modalProject.site_link}>
                                         <i className="fa fa-link" aria-hidden="true"></i><span className="ml-2">View Site</span>
-                                    </button>
-                                    <button className="btn btn-info project-modal-button ml-1">
+                                    </a>
+                                    <a className={props.modalProject.code_link !== "" ? "btn btn-info project-modal-button ml-1" : "d-none"} href={props.modalProject.code_link}>
                                         <i className="fa fa-code" aria-hidden="true"></i><span className="ml-2">View Code</span>
-                                    </button>
+                                    </a>
                                 </div>
                                 <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                     <h3 className="text-white" aria-hidden="true">&times;</h3>
