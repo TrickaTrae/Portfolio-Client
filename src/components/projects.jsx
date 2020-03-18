@@ -43,7 +43,7 @@ const Projects = props => {
             <div className="modal fade" id="projectModal" tabIndex="-1" role="dialog" aria-labelledby="projectModalLabel" aria-hidden="true">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content project-modal-content">
-                        <img src={props.modalProject.image} className="w-100 h-25" alt="project pic"/>
+                        <img src={props.modalProject.image} className="w-100 project-modal-image" alt="project pic"/>
                         <div className="p-3">
                             <h3 className="text-white">{props.modalProject.title}</h3>
                             <div className="border-top border-info w-50 mt-3 mb-3"></div>

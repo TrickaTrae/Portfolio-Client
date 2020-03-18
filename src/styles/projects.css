@@ -34,7 +34,7 @@
 .project-desc {
   display: block;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -44,12 +44,23 @@
   border-radius: 50% !important;
 }
 
+.project-modal-image {
+  height: 20rem;
+  max-height: 20rem;
+  object-fit: cover;
+}
+
 .project-modal-content {
   background-color: #282c34;
 }
 
 .project-modal-button {
   border-radius: 2.5px;
+}
+
+.close {
+  border: none !important;
+  outline: none !important;
 }
 
 @media screen and (max-width: 576px) {
