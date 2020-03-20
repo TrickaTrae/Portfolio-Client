@@ -16,9 +16,11 @@ class AdminPage extends Component {
             filters: '',
             disabled: '',
             imageFile: '',
+            isLoading: false,
             newImageFile: '',
             modify: '',
             projectToModify: '',
+            modifyIsLoading: false,
             fileInputKey: Date.now()
         }
     }
@@ -44,7 +46,7 @@ class AdminPage extends Component {
                         <label htmlFor="project_image" className="text-white">Upload Website Image: </label>
                         <input type="file" className="form-control-file mb-1 text-white" id="project_image" key={this.state.fileInputKey} required onChange={e => this.setState({ imageFile: e.target.files[0] })} />
                     </div>
-                    <button type="submit" className="btn btn-success btn-lg submit-button">Submit</button>
+                    <button type="submit" className="btn btn-success btn-lg submit-button">{this.state.isLoading ? <i className="fa fa-spinner fa-pulse"></i> : "Submit"}</button>
                 </form>
             </div>
         )
@@ -69,7 +71,7 @@ class AdminPage extends Component {
                                                 <label className="text-secondary">Code link: </label><input type="text" className="form-control" defaultValue={this.state.code_link} onChange={e => this.setState({ code_link: e.target.value })}/><br/>
                                                 <label className="text-secondary">Filters: </label><input type="text" className="form-control" defaultValue={this.state.filters} onChange={e => this.setState({ filters: e.target.value })}/><br/>
                                                 {this.state.disabled ? <button className="btn btn-warning mt-3" onClick={() => this.setState({ disabled: false })}>Enable Project</button> : <button className="btn btn-danger mt-3" onClick={() => this.setState({ disabled: true })}>Disable Project</button>}
-                                                <button type="submit" className="btn btn-success ml-2 mt-3" onClick={() => this.handleProjectModifySubmit(project._id)}>Submit</button>
+                                                <button type="submit" className="btn btn-success ml-2 mt-3" onClick={() => this.handleProjectModifySubmit(project._id)}>{this.state.modifyIsLoading ? <i className="fa fa-spinner fa-pulse"></i> : "Submit"}</button>
                                                 <button className="btn btn-danger ml-2 mt-3" onClick={() => this.handleProjectReset()}>Cancel</button>
                                             </div>
                                             <div className="col-6 d-flex flex-column justify-content-center p-2">
@@ -138,6 +140,7 @@ class AdminPage extends Component {
 
     handleProjectFormSubmit = e => {
         e.preventDefault();
+        this.setState({ isLoading: true });
         fetch(process.env.REACT_APP_VERIFYUSERSESSION_URL + localStorage.getItem("token")).then(result => {
             if(result.ok && result.status === 200){
                 this.setState({ formInput: {
@@ -158,6 +161,7 @@ class AdminPage extends Component {
                         body: formData,
                     }).then((response) => {
                         if(response.ok){
+                            this.setState({ isLoading: false });
                             this.handleProjectReset();
                             this.fetchProjectsInDB();
                         }
@@ -165,6 +169,7 @@ class AdminPage extends Component {
                 });
             } else {
                 alert("You are not authorized to be on this page.");
+                this.setState({ isLoading: false });
                 localStorage.clear();
                 this.props.history.push('/');
             }
@@ -172,6 +177,7 @@ class AdminPage extends Component {
     }
 
     handleProjectModifySubmit = projectId => {
+        this.setState({ modifyIsLoading: true });
         if(this.state.newImageFile !== ""){
             // new image file uploaded
             this.setState({ formInput: {
@@ -193,6 +199,7 @@ class AdminPage extends Component {
                     body: formData,
                 }).then((response) => {
                     if(response.ok){
+                        this.setState({ modifyIsLoading: false });
                         this.handleProjectReset();
                         this.fetchProjectsInDB();
                     }
@@ -221,6 +228,7 @@ class AdminPage extends Component {
                     }
                 }).then((response) => {
                     if(response.ok){
+                        this.setState({ modifyIsLoading: false });
                         this.handleProjectReset();
                         this.fetchProjectsInDB();
                     }
