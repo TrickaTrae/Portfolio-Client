@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import "../styles/admin-page.css";
 
-const projectURL = process.env.REACT_APP_PROJECT_URL;
-const verifyURL = process.env.REACT_APP_VERIFYUSERSESSION_URL;
-const signoutURL = process.env.REACT_APP_SIGNOUT_URL;
-
 class AdminPage extends Component {
     constructor(){
         super();
@@ -31,32 +27,31 @@ class AdminPage extends Component {
         this.fetchProjectsInDB();
     }
 
-    render() {
+    displayProjectForm = () => {
         return (
-          <div id="admin_page">
-              <div className="container">
+            <div className="container">
+                <form className="project-form" onSubmit={this.handleProjectFormSubmit}>
+                    <div className="form-group">
+                        <h1 className="text-white">Add a new project</h1>
+                        <input type="text" className="form-control mb-1" id="project_title" placeholder="title" value={this.state.title} required onChange={e => this.setState({ title: e.target.value })} />
+                        <textarea className="form-control mb-1" id="project_description" rows="4" placeholder="description" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })} />
+                        <input type="text" className="form-control mb-1" id="project_tech" placeholder="technologies used" value={this.state.tech} onChange={e => this.setState({ tech: e.target.value })} />
+                        <input type="text" className="form-control mb-1" id="project_site_link" placeholder="site url" value={this.state.site_link} onChange={e => this.setState({ site_link: e.target.value })} />
+                        <input type="text" className="form-control mb-1" id="project_code_link" placeholder="code url (github, bitbucket, etc)" value={this.state.code_link} onChange={e => this.setState({ code_link: e.target.value })} />
+                        <input type="text" className="form-control" id="project_filters" placeholder="filters (React, Meteor, etc)" value={this.state.filters} onChange={e => this.setState({ filters: e.target.value })} />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="project_image" className="text-white">Upload Website Image: </label>
+                        <input type="file" className="form-control-file mb-1 text-white" id="project_image" key={this.state.fileInputKey} required onChange={e => this.setState({ imageFile: e.target.files[0] })} />
+                    </div>
+                    <button type="submit" className="btn btn-success btn-lg submit-button">Submit</button>
+                </form>
+            </div>
+        )
+    }
 
-                  <Link to="/"><button className="btn btn-info mb-2 ml-1">home</button></Link>
-                  <button onClick={() => this.handleSignOut()} className="btn btn-info mb-2 ml-1">sign-out</button>
-                  <form className="project-form" onSubmit={this.handleProjectFormSubmit}>
-                      <div className="form-group">
-                          <h1 className="text-white">Add a new project</h1>
-                          <input type="text" className="form-control mb-1" id="project_title" placeholder="title" value={this.state.title} required onChange={e => this.setState({ title: e.target.value })} />
-                          <textarea className="form-control mb-1" id="project_description" rows="4" placeholder="description" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })} />
-                          <input type="text" className="form-control mb-1" id="project_tech" placeholder="technologies used" value={this.state.tech} onChange={e => this.setState({ tech: e.target.value })} />
-                          <input type="text" className="form-control mb-1" id="project_site_link" placeholder="site url" value={this.state.site_link} onChange={e => this.setState({ site_link: e.target.value })} />
-                          <input type="text" className="form-control mb-1" id="project_code_link" placeholder="code url (github, bitbucket, etc)" value={this.state.code_link} onChange={e => this.setState({ code_link: e.target.value })} />
-                          <input type="text" className="form-control" id="project_filters" placeholder="filters (React, Meteor, etc)" value={this.state.filters} onChange={e => this.setState({ filters: e.target.value })} />
-                      </div>
-                      <div className="form-group">
-                          <label htmlFor="project_image" className="text-white">Upload Website Image: </label>
-                          <input type="file" className="form-control-file mb-1 text-white" id="project_image" key={this.state.fileInputKey} required onChange={e => this.setState({ imageFile: e.target.files[0] })} />
-                      </div>
-                      <button type="submit" className="btn btn-success btn-lg submit-button">Submit</button>
-                  </form>
-      
-              </div>
-
+    displayProjects = () => {
+        return (
             <div className="container">
                 {this.state.projects.map((project, key) => {
                     if(this.state.modify === true && this.state.projectToModify === project._id){
@@ -114,22 +109,36 @@ class AdminPage extends Component {
                     }
                 })}
             </div>
+        )
+    }
 
-          </div>
+    render() {
+        return (
+            <div id="admin_page">
+
+                <div className="container">
+                    <div className="row">
+                        <Link to="/"><button className="btn btn-info mb-2 ml-1">home</button></Link>
+                        <button onClick={() => this.handleSignOut()} className="btn btn-info mb-2 ml-1">sign-out</button>
+                    </div>
+                </div>
+
+                {this.displayProjectForm()}
+                {this.displayProjects()}
+                
+            </div>
         );
     }
 
     fetchProjectsInDB = () => {
-        fetch(projectURL).then(result => {
-            return result.json();
-        }).then(data => {
-            this.setState({ projects: data });
+        fetch(process.env.REACT_APP_PROJECT_URL).then(result => result.json()).then(projects => {
+            this.setState({ projects });
         })
     }
 
     handleProjectFormSubmit = e => {
         e.preventDefault();
-        fetch(verifyURL + localStorage.getItem("token")).then(result => {
+        fetch(process.env.REACT_APP_VERIFYUSERSESSION_URL + localStorage.getItem("token")).then(result => {
             if(result.ok && result.status === 200){
                 this.setState({ formInput: {
                     title: this.state.title,
@@ -143,7 +152,7 @@ class AdminPage extends Component {
                     formData.append('formInput', JSON.stringify(this.state.formInput));
                     formData.append('image', this.state.imageFile);
             
-                    fetch(projectURL, {
+                    fetch(process.env.REACT_APP_PROJECT_URL, {
                         method: 'post',
                         mode: 'cors',
                         body: formData,
@@ -162,7 +171,7 @@ class AdminPage extends Component {
         })
     }
 
-    handleProjectModifySubmit = (projectId) => {
+    handleProjectModifySubmit = projectId => {
         if(this.state.newImageFile !== ""){
             // new image file uploaded
             this.setState({ formInput: {
@@ -178,7 +187,7 @@ class AdminPage extends Component {
                 formData.append('formInput', JSON.stringify(this.state.formInput));
                 formData.append('image', this.state.newImageFile);
         
-                fetch(projectURL + '/' + projectId, {
+                fetch(process.env.REACT_APP_PROJECT_URL + '/' + projectId, {
                     method: 'put',
                     mode: 'cors',
                     body: formData,
@@ -203,7 +212,7 @@ class AdminPage extends Component {
             }}, () => {
                 let formData = JSON.stringify(this.state.formInput)
         
-                fetch(projectURL + '/' + projectId, {
+                fetch(process.env.REACT_APP_PROJECT_URL + '/' + projectId, {
                     method: 'put',
                     mode: 'cors',
                     body: formData,
@@ -220,10 +229,10 @@ class AdminPage extends Component {
         }
     }
 
-    handleProjectDelete = (projectId) => {
-        fetch(verifyURL + localStorage.getItem("token")).then(result => {
+    handleProjectDelete = projectId => {
+        fetch(process.env.REACT_APP_VERIFYUSERSESSION_URL + localStorage.getItem("token")).then(result => {
             if(result.ok && result.status === 200){
-                fetch(projectURL + '/' + projectId, {
+                fetch(process.env.REACT_APP_PROJECT_URL + '/' + projectId, {
                     method: 'delete',
                     mode: 'cors'
                 }).then((response) => {
@@ -231,7 +240,7 @@ class AdminPage extends Component {
                         this.fetchProjectsInDB();
                     }
                 })
-            }else {
+            } else {
                 alert("You are not authorized to be on this page.");
                 localStorage.clear();
                 this.props.history.push('/');
@@ -239,8 +248,8 @@ class AdminPage extends Component {
         })
     }
 
-    handleProjectModify = (projectId) => {
-        fetch(verifyURL + localStorage.getItem("token")).then(result => {
+    handleProjectModify = projectId => {
+        fetch(process.env.REACT_APP_VERIFYUSERSESSION_URL + localStorage.getItem("token")).then(result => {
             if(result.ok && result.status === 200){
                 this.setState({
                     modify: true,
@@ -260,7 +269,7 @@ class AdminPage extends Component {
                         })
                     )
                 })
-            }else {
+            } else {
                 alert("You are not authorized to be on this page.");
                 localStorage.clear();
                 this.props.history.push('/');
@@ -285,9 +294,9 @@ class AdminPage extends Component {
     }
 
     handleSignOut = () => {
-        fetch(verifyURL + localStorage.getItem("token")).then(result => {
+        fetch(process.env.REACT_APP_VERIFYUSERSESSION_URL + localStorage.getItem("token")).then(result => {
             if(result.ok && result.status === 200){
-                fetch(signoutURL + localStorage.getItem("token")).then(response => {
+                fetch(process.env.REACT_APP_SIGNOUT_URL + localStorage.getItem("token")).then(response => {
                     if(response.ok){
                         alert("Successfully signed out!");
                         localStorage.clear();
@@ -298,7 +307,7 @@ class AdminPage extends Component {
                         })
                     }
                 })
-            }else {
+            } else {
                 alert("You are not authorized to be on this page.");
                 localStorage.clear();
                 this.props.history.push('/');
