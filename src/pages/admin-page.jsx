@@ -36,7 +36,7 @@ class AdminPage extends Component {
                     <div className="form-group">
                         <h1 className="text-white">Add a new project</h1>
                         <input type="text" className="form-control mb-1" id="project_title" placeholder="title" value={this.state.title} required onChange={e => this.setState({ title: e.target.value })} />
-                        <textarea className="form-control mb-1" id="project_description" rows="4" placeholder="description" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })} />
+                        <textarea className="form-control mb-1" id="project_description" placeholder="description" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })} />
                         <input type="text" className="form-control mb-1" id="project_tech" placeholder="technologies used" value={this.state.tech} onChange={e => this.setState({ tech: e.target.value })} />
                         <input type="text" className="form-control mb-1" id="project_site_link" placeholder="site url" value={this.state.site_link} onChange={e => this.setState({ site_link: e.target.value })} />
                         <input type="text" className="form-control mb-1" id="project_code_link" placeholder="code url (github, bitbucket, etc)" value={this.state.code_link} onChange={e => this.setState({ code_link: e.target.value })} />
@@ -67,7 +67,7 @@ class AdminPage extends Component {
                                                 <label className="text-secondary">Title: </label>
                                                 <input type="text" className="form-control" defaultValue={this.state.title} required onChange={e => this.setState({ title: e.target.value })}/><br/>
                                                 <label className="text-secondary">Description: </label>
-                                                <textarea type="text" className="form-control" rows="4" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })}/><br/>
+                                                <textarea type="text" className="form-control" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })}/><br/>
                                                 <label className="text-secondary">Tech: </label>
                                                 <input type="text" className="form-control" defaultValue={this.state.tech} onChange={e => this.setState({ tech: e.target.value })}/><br/>
                                                 <label className="text-secondary">Site link: </label>
@@ -103,7 +103,7 @@ class AdminPage extends Component {
                                     <div className="col-6">
                                         <h2 className="text-white">{project._id}</h2>
                                         <span className="text-secondary">Title: </span><span className="text-white">{project.title}</span><br/>
-                                        <span className="text-secondary">Description: </span><span className="text-white">{project.description}</span><br/>
+                                        <span className="text-secondary">Description: </span><pre className="text-white project-desc-pre">{project.description}</pre><br/>
                                         <span className="text-secondary">Tech: </span><span className="text-white">{project.tech}</span><br/>
                                         <span className="text-secondary">Site link: </span><span className="text-white">{project.site_link}</span><br/>
                                         <span className="text-secondary">Code link: </span><span className="text-white">{project.code_link}</span><br/>

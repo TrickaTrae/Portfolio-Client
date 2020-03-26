@@ -47,7 +47,9 @@ const Projects = props => {
                         <div className="p-3">
                             <h3 className="text-white">{props.modalProject.title}</h3>
                             <div className="border-top border-info w-50 mt-3 mb-3"></div>
-                            <p className="text-white">{props.modalProject.description}</p>
+                            <p className="text-white font-weight-bold m-0"><u>Overview</u></p>
+                            <pre className="text-white project-desc-pre">{props.modalProject.description}</pre>
+                            <p className="text-white font-weight-bold m-0"><u>Technologies Used</u></p>
                             <p className="text-white">{props.modalProject.tech}</p>
                             <div className="d-flex align-items-start justify-content-between pt-2">
                                 <div>
