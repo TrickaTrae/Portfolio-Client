@@ -37,14 +37,14 @@ class AdminPage extends Component {
                         <h1 className="text-white">Add a new project</h1>
                         <div className="row">
                             <div className="col-12 col-md-6">
-                                <input type="text" className="form-control mb-1" id="project_title" placeholder="title" value={this.state.title} required onChange={e => this.setState({ title: e.target.value })} />
-                                <input type="text" className="form-control mb-1" id="project_site_link" placeholder="site url" value={this.state.site_link} onChange={e => this.setState({ site_link: e.target.value })} />
-                                <input type="text" className="form-control mb-1" id="project_code_link" placeholder="code url (github, bitbucket, etc)" value={this.state.code_link} onChange={e => this.setState({ code_link: e.target.value })} />
-                                <input type="text" className="form-control mb-1" id="project_filters" placeholder="filters (React, Meteor, etc)" value={this.state.filters} onChange={e => this.setState({ filters: e.target.value })} />
+                                <input type="text" className="form-control mb-1 bg-dark text-white" id="project_title" placeholder="title" value={this.state.title} required onChange={e => this.setState({ title: e.target.value })} />
+                                <input type="text" className="form-control mb-1 bg-dark text-white" id="project_site_link" placeholder="site url" value={this.state.site_link} onChange={e => this.setState({ site_link: e.target.value })} />
+                                <input type="text" className="form-control mb-1 bg-dark text-white" id="project_code_link" placeholder="code url (github, bitbucket, etc)" value={this.state.code_link} onChange={e => this.setState({ code_link: e.target.value })} />
+                                <input type="text" className="form-control mb-1 bg-dark text-white" id="project_filters" placeholder="filters (React, Meteor, etc)" value={this.state.filters} onChange={e => this.setState({ filters: e.target.value })} />
                             </div>
                             <div className="col-12 col-md-6">
-                                <textarea className="form-control mb-1 h-75" id="project_description" placeholder="description" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })} />
-                                <input type="text" className="form-control mb-1" id="project_tech" placeholder="technologies used" value={this.state.tech} onChange={e => this.setState({ tech: e.target.value })} />
+                                <textarea className="form-control mb-1 h-75 bg-dark text-white" id="project_description" placeholder="description" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })} />
+                                <input type="text" className="form-control mb-1 bg-dark text-white" id="project_tech" placeholder="technologies used" value={this.state.tech} onChange={e => this.setState({ tech: e.target.value })} />
                             </div>
                         </div>
                     </div>
@@ -79,21 +79,21 @@ class AdminPage extends Component {
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 <label className="text-secondary">Title: </label>
-                                                <input type="text" className="form-control" defaultValue={this.state.title} required onChange={e => this.setState({ title: e.target.value })}/><br/>
+                                                <input type="text" className="form-control bg-dark text-white" defaultValue={this.state.title} required onChange={e => this.setState({ title: e.target.value })}/><br/>
                                                 <label className="text-secondary">Description: </label>
-                                                <textarea type="text" className="form-control" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })}/><br/>
+                                                <textarea type="text" className="form-control bg-dark text-white" value={this.state.description} required onChange={e => this.setState({ description: e.target.value })}/><br/>
                                                 <label className="text-secondary">Tech: </label>
-                                                <input type="text" className="form-control" defaultValue={this.state.tech} onChange={e => this.setState({ tech: e.target.value })}/><br/>
+                                                <input type="text" className="form-control bg-dark text-white" defaultValue={this.state.tech} onChange={e => this.setState({ tech: e.target.value })}/><br/>
                                                 <label className="text-secondary">Filters: </label>
-                                                <input type="text" className="form-control" defaultValue={this.state.filters} onChange={e => this.setState({ filters: e.target.value })}/><br/>
+                                                <input type="text" className="form-control bg-dark text-white" defaultValue={this.state.filters} onChange={e => this.setState({ filters: e.target.value })}/><br/>
                                             </div>
                                             <div className="col-12 col-md-6 d-flex flex-column justify-content-center">
                                                 <label className="text-secondary">Site link: </label>
-                                                <input type="text" className="form-control" defaultValue={this.state.site_link} onChange={e => this.setState({ site_link: e.target.value })}/><br/>
+                                                <input type="text" className="form-control bg-dark text-white" defaultValue={this.state.site_link} onChange={e => this.setState({ site_link: e.target.value })}/><br/>
                                                 <label className="text-secondary">Code link: </label>
-                                                <input type="text" className="form-control" defaultValue={this.state.code_link} onChange={e => this.setState({ code_link: e.target.value })}/><br/>
+                                                <input type="text" className="form-control bg-dark text-white" defaultValue={this.state.code_link} onChange={e => this.setState({ code_link: e.target.value })}/><br/>
                                                 <label className="text-white">Keep current image: </label>
-                                                <input type="text" className="form-control" defaultValue={this.state.imageFile}/>
+                                                <input type="text" className="form-control bg-dark text-white" defaultValue={this.state.imageFile}/>
                                                 <p className="text-white mt-3 mb-3">- OR -</p>
                                                 <label htmlFor="project_image_2" className="text-white">Upload New Image: </label>
                                                 <input type="file" className="form-control-file mb-1 text-white p-auto" id="project_image_2" required onChange={e => this.setState({ newImageFile: e.target.files[0] })} />
