@@ -1,4 +1,11 @@
 #home {
-    background-color: #000;
+    background-color: #000000;
+}
+
+.intro {
+    min-height: 100vh;
+}
+
+.about {
     min-height: 100vh;
 }
