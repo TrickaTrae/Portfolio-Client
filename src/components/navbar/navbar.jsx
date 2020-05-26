@@ -37,7 +37,6 @@ const NavBar = props => {
 
 const mapStateToProps = state => {
   return {
-      userLoading: state.userState.userLoading,
       userLoggedIn: state.userState.userLoggedIn,
   }
 }

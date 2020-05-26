@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { verifyUser } from '../../-global-state/actions/user-actions';
 import "./admin.css";
 
 class Admin extends Component {
     constructor(){
         super();
         this.state = {
-            projectsLoading: true,
             formInput: {},
             projects: [],
             title: '',
@@ -29,14 +27,13 @@ class Admin extends Component {
     }
 
     componentDidMount = () => {
-        this.props.verifyUser(localStorage.getItem("token"));
         this.fetchProjectsInDB();
     }
 
     displayProjectForm = () => {
         return (
             <div className="container-fluid pt-5 mb-5">
-                <form className="project-form mt-5" onSubmit={this.handleProjectFormSubmit}>
+                <form className="project-form mt-5 border border-dark" onSubmit={this.handleProjectFormSubmit}>
                     <div className="form-group">
                         <h1 className="text-white">Add a new project</h1>
                         <div className="row">
@@ -180,25 +177,26 @@ class Admin extends Component {
     }
 
     render() {
-        return (
-            <div id="admin">
-                {
-                    (this.props.userLoading || this.state.projectsLoading) ? "" : this.props.userLoggedIn === false ? <Redirect to="/" /> : 
-                    <>
+        if(this.props.userLoggedIn === false){
+            return <Redirect to="/" />
+        } else {
+            return (
+                <div id="admin">
+                    <div className="fade-in-fwd">
                         {this.displayProjectForm()}
                         {this.displayProjects()}
-                    </>
-                }
-            </div>
-        );
+                    </div>
+                </div>
+            );
+        }
     }
 
     fetchProjectsInDB = () => {
-        this.setState({ projectsLoading: true }, () => {
+        if(this.props.userLoggedIn){
             fetch(process.env.REACT_APP_PROJECT_URL).then(result => result.json()).then(projects => {
-                this.setState({ projects, projectsLoading: false });
+                this.setState({ projects });
             })
-        })
+        }
     }
 
     handleProjectFormSubmit = e => {
@@ -342,9 +340,8 @@ class Admin extends Component {
 
 const mapStateToProps = state => {
     return {
-        userLoading: state.userState.userLoading,
         userLoggedIn: state.userState.userLoggedIn,
     }
 }
 
-export default connect(mapStateToProps, { verifyUser })(Admin);
+export default connect(mapStateToProps)(Admin);

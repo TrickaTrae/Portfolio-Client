@@ -1,7 +1,7 @@
 #admin{
     background-color: #000000;
     padding-bottom: 3rem;
-    height: 100%;
+    min-height: 100vh;
 }
 
 .admin-btn {
@@ -9,7 +9,7 @@
 }
 
 .project-form {
-    background-color: #282c34;
+    background-color: #0c0c0c;
     border: 1px solid black;
     border-radius: 2.5px;
     padding: 2%;
@@ -21,7 +21,7 @@
 }
 
 .projects {
-    background-color: #282c34;
+    background-color: #0c0c0c;
     border-radius: 2.5px;
     margin: 1% 0;
     transition: all .25s ease-in-out;
