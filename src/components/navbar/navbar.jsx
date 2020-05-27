@@ -14,8 +14,12 @@ const NavBar = props => {
 
       <div className="collapse navbar-collapse" id="navbarContent">
           <div className="navbar-nav ml-auto">
-              <Link to="/blog" className="nav-item nav-link">Blog</Link>
-              <Link to="/contact" className="nav-item nav-link">Contact</Link>
+              <Link to="/blog" className="nav-item nav-link">
+                <div data-toggle="collapse" data-target="#navbarContent">Blog</div>
+              </Link>
+              <Link to="/contact" className="nav-item nav-link">
+                <div data-toggle="collapse" data-target="#navbarContent">Contact</div>
+              </Link>
               {
                 props.userLoggedIn &&
                 <li className="nav-item dropdown">
@@ -23,9 +27,15 @@ const NavBar = props => {
                     Admin
                   </div>
                   <div className="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
-                    <Link className="dropdown-item text-white bg-dark" to="/admin">Admin</Link>
-                    <Link className="dropdown-item text-white bg-dark" to="/user">User</Link>
-                    <button className="dropdown-item text-white bg-dark pointer" onClick={() => props.signoutUser(localStorage.getItem("token"))}>Sign Out</button>
+                    <Link className="dropdown-item text-white bg-dark" to="/admin">
+                      <div data-toggle="collapse" data-target="#navbarContent">Admin</div>
+                    </Link>
+                    <Link className="dropdown-item text-white bg-dark" to="/user">
+                      <div data-toggle="collapse" data-target="#navbarContent">User</div>
+                    </Link>
+                    <button className="dropdown-item text-white bg-dark pointer" onClick={() => props.signoutUser(localStorage.getItem("token"))} data-toggle="collapse" data-target="#navbarContent">
+                      Sign Out
+                    </button>
                   </div>
                 </li>
               }

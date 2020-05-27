@@ -16,7 +16,7 @@ class Blog extends Component {
     render() {
         return (
             <div id="blog">
-                <div className="container d-flex align-items-center justify-content-start fade-in-fwd blog-container">
+                <div className="container d-flex align-items-center justify-content-start fade-in-fwd pt-5 pb-5 blog-container">
                     <div className="card-columns">
                         {this.state.posts.map((post, key) => {
                             return (
