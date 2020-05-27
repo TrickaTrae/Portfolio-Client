@@ -15,10 +15,12 @@ const NavBar = props => {
       <div className="collapse navbar-collapse" id="navbarContent">
           <div className="navbar-nav ml-auto">
               <Link to="/blog" className="nav-item nav-link">
-                <div data-toggle="collapse" data-target="#navbarContent">Blog</div>
+                <div className="d-none d-lg-block">Blog</div>
+                <div className="d-block d-sm-block d-md-block d-lg-none" data-toggle="collapse" data-target="#navbarContent">Blog</div>
               </Link>
               <Link to="/contact" className="nav-item nav-link">
-                <div data-toggle="collapse" data-target="#navbarContent">Contact</div>
+                <div className="d-none d-lg-block">Contact</div>
+                <div className="d-block d-sm-block d-md-block d-lg-none" data-toggle="collapse" data-target="#navbarContent">Contact</div>
               </Link>
               {
                 props.userLoggedIn &&
@@ -28,13 +30,16 @@ const NavBar = props => {
                   </div>
                   <div className="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
                     <Link className="dropdown-item text-white bg-dark" to="/admin">
-                      <div data-toggle="collapse" data-target="#navbarContent">Admin</div>
+                      <div className="d-none d-lg-block">Admin</div>
+                      <div className="d-block d-sm-block d-md-block d-lg-none" data-toggle="collapse" data-target="#navbarContent">Admin</div>
                     </Link>
                     <Link className="dropdown-item text-white bg-dark" to="/user">
-                      <div data-toggle="collapse" data-target="#navbarContent">User</div>
+                      <div className="d-none d-lg-block">User</div>
+                      <div className="d-block d-sm-block d-md-block d-lg-none" data-toggle="collapse" data-target="#navbarContent">User</div>
                     </Link>
-                    <button className="dropdown-item text-white bg-dark pointer" onClick={() => props.signoutUser(localStorage.getItem("token"))} data-toggle="collapse" data-target="#navbarContent">
-                      Sign Out
+                    <button className="dropdown-item text-white bg-dark pointer" onClick={() => props.signoutUser(localStorage.getItem("token"))}>
+                      <div className="d-none d-lg-block">Sign Out</div>
+                      <div className="d-block d-sm-block d-md-block d-lg-none" data-toggle="collapse" data-target="#navbarContent">Sign Out</div>
                     </button>
                   </div>
                 </li>
